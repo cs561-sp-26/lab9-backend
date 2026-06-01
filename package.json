@@ -7,8 +7,7 @@
   "scripts": {
     "test": "jest --runInBand --detectOpenHandles --forceExit",
     "dev": "nodemon src/server.js",
-    "start": "node src/server.js",
-    "deploy": "powershell -File ./deploy.ps1"
+    "start": "node src/server.js"
   },
   "keywords": [
     "middleware",
