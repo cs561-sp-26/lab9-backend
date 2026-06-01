@@ -71,7 +71,6 @@ npm test
 ## Known Deployment Gotchas
 
 - **MongoDB Atlas network access** --- After creating a cluster, go to *Network Access* in Atlas and add `0.0.0.0/0` to the IP allowlist (or your hosting platform's specific IP range). Without this, the server cannot reach the database and crashes on startup.
-- **CORS origin is hardcoded** --- `src/server.js` sets the production CORS origin to `https://speedscore.webdevbook.com`. Update this value to your own deployed frontend URL (or make it configurable via an env var such as `CORS_ORIGIN`) before deploying; otherwise your frontend will receive CORS errors on every API call.
 - **File name case sensitivity** --- The server imports `./middleware/rateLimiter.js` (camelCase). On Linux hosts (Render, Railway, Fly.io, etc.) the file system is case-sensitive. If you encounter a `MODULE_NOT_FOUND` error on startup, check that the filename on disk matches the import exactly.
-- **`NODE_ENV=production`** --- Set this on your hosting platform. It enables `Secure` + `SameSite=None` cookies, which are required for cross-origin sessions between a separately deployed frontend and this API.
+- **`NODE_ENV=production`** --- Set this on your hosting platform. It puts Express into production mode, which enables secure session cookies and suppresses verbose error output.
 - **`API_DEPLOYMENT_URL`** --- Set this to your deployed backend URL (e.g., `https://my-speedscore-api.onrender.com`). It is used in GitHub OAuth callback URLs and email verification links.
